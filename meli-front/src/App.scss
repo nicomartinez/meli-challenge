@@ -1,0 +1,105 @@
+$content: 0 10vw; 
+$text-color: #333;
+$header-height: 2.7rem;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.App {
+  margin: 0 auto;
+  width: 100vw;
+}
+
+.App-header {
+  @include flex-center;
+  height: $header-height;
+  background-color: #ffe600;
+  padding: $content;
+
+  .App-logo {
+    height: 2rem;
+    pointer-events: none;
+    padding-right: 0.5rem;
+  }
+
+  .Query-form {
+    height: 2rem;
+    flex-grow: 1;
+    border-radius: 5px;
+    overflow: hidden;
+    label {
+      @include flex-center;
+      background-color: #fff;
+      width: 100%;
+      height: inherit;
+      input {
+        color: $text-color;
+        padding: 0 0.8rem;
+        font-size: 1.125rem;
+        height: 1.125rem;
+        flex-grow: 1;
+        border: none;
+        &:focus, &:active {
+          outline: none;
+        }
+      }
+      span {
+        background-color: #eee;
+        padding: 0.5rem;
+        height: inherit;
+        width: 2rem;
+        img {
+          object-fit: contain;
+          vertical-align: top;
+        }
+      }
+    }
+  }
+}
+
+.App-results {
+  padding: $content;
+  background-color: #eee;
+  min-height: calc(100vh - $header-height);
+
+}
+
+.App-results-categories {
+  padding: 1rem 0;
+  font-size: 0.875rem;
+  ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+
+    li {
+      color: #999;
+      &:not(:last-child)::after  {
+        content: '>';
+        margin: 0 0.6rem;
+      }
+      &:last-child {
+        color: #666;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.App-results-products {
+  .product {
+    padding: 1rem;
+    img {
+      padding-right: 1rem;
+    }
+    .details {
+
+    }
+  }
+}
+
+.App-results-detail {
+  display: none;
+}

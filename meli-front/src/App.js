@@ -7,7 +7,7 @@ import {
   Route
 } from 'react-router-dom';
 import Home from './pages/Home';
-import ProductList from './pages/ProductList';
+import ProductListPage from './pages/ProductListPage';
 import ProductDetail from './pages/ProductDetail';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
       <section className='App-results'>
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/items" element={<ProductList />} />
+            <Route path="/items" element={<ProductListPage />} />
             <Route path="/items/:id" element={<ProductDetail />} />
             <Route element={Home}/>
         </Routes>

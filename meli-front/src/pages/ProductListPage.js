@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from 'react-router-dom';
 import CategoriesList from "../components/CategoriesList";
+import ProductList from '../components/ProductList';
 
-const ProductList = () => {
+const ProductListPage = () => {
     const [results, setResults] = useState({});
     const [params] = useSearchParams();
     const query = params.get('search');
@@ -16,25 +17,19 @@ const ProductList = () => {
         fetchData();
     }, [query]);
 
-    if (!results.products) return <div>No se encontraron resultados para la busqueda</div>;
+    if (!results.items) return null;
 
     return (
         <>
             <CategoriesList categories={results.categories} />
     
             <div className='App-results-products'>
-            {results.products.map(product => (
-                <article className='product'>
-                <img className='product-image' alt="Imagen de producto"/>
-                <div className='product-details'>
-                    <p>$ 1.900<span className='envio'><img className='shipping-available' alt="envio disponible"/></span></p>
-                    <p className='product-name'>nombre producto</p>
-                </div>
-                </article>  
+            {results.items.map(item => (
+                <ProductList key={item.id} item={item} />
             ))}
             </div>
         </>
     );
 }
 
-export default ProductList;
+export default ProductListPage;

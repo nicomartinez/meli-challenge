@@ -7,9 +7,28 @@ $header-height: 2.7rem;
   align-items: center;
 }
 
+.d-flex {
+  display: flex;
+}
+
+.w-100 {
+  width: 100%
+}
+
+.separator {
+  height: 1px;
+  padding: 0 1rem;
+  padding-top: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.link-decoration {
+  text-decoration: none;
+  color: inherit;
+}
+
 .App {
   margin: 0 auto;
-  width: 100vw;
 }
 
 .App-header {
@@ -90,12 +109,48 @@ $header-height: 2.7rem;
 
 .App-results-products {
   .product {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
     padding: 1rem;
-    img {
-      padding-right: 1rem;
-    }
-    .details {
+    padding-bottom: 0;
+    background-color: #fff;
 
+    &-image {
+      flex: 0 0 auto;
+      padding-right: 1rem;
+      width: 11.25rem;
+      height: 11.25rem;
+      object-fit: contain;
+      border-radius: 4px;
+    }
+    &-details {
+      font-size: 1.5rem;
+      flex: 1 0 auto;
+      max-width: 100%;
+
+      .price-decimals {
+        font-size: 1rem;
+        vertical-align: super;
+      }
+
+      .shipping {
+        margin-left: .5rem;
+      }
+
+      .product-name {
+        margin-top: 2rem;
+        font-size: 1.125rem;
+        max-width: 60%;
+      }
+
+      .location {
+        margin-left: auto;
+        width: 20%;
+        font-size: 0.75rem;
+        align-self: end;
+        color: #666;
+      }
     }
   }
 }

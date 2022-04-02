@@ -18,6 +18,7 @@ const ProductListPage = () => {
     }, [query]);
 
     if (!results.items) return null;
+    document.title = 'Mercado Libre - Busqueda de productos';
 
     return (
         <>

@@ -1,45 +1,47 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import path from 'path';
-import request from 'request';
-import transformItemResults from './transformItemResults';
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const utils = require('./utils');
+const transformUtils = require('./transformUtils');
 
-const API_URL = 'http://api.mercadolibre.com';
 const AUTHOR_DATA = {
     name: 'Nicolas',
     lastname: 'Martinez'
 };
 const app = express();
 
-app.use(cors);
 app.use(express.static(path.join(__dirname, '/build')));
 app.use(bodyParser.json());
 
-const consumeAPI = (route, operations, res) => {
-    request(API_URL.concat(route), (err, body) => {
-        if (err) {
-            res.status(500).json({ message: 'Error obteniendo información de la fuente', error });
-        } else {
-            operations(body.toJSON());
-        }
-    });
-}
+
 
 app.get('/api/items', async (req, res) => {
     const query = req.query.q;
-    await consumeAPI(`/sites/MLA/search?q=${query}`, (data) => {
-        const results = transformItemResults(JSON.parse(data.body));
+    try {
+        const itemsResult = await utils.consumeAPI(`/sites/MLA/search?q=${query}`);
+        const results = await transformUtils.transformItemResults(JSON.parse(itemsResult.toJSON().body));
         res.status(200).json({ author: AUTHOR_DATA, ...results});
-    }, res);
+    } catch (e) {
+        res.status(500).json({ message: 'Error obteniendo información de la fuente', e });
+    }
 });
 
 app.get('/api/items/:id', async (req, res) => {
-    const query = req.params.id;
-    consumeAPI(`/sites/MLA/search?q=${query}`, (data) => {
-        const results = transformResults(data);
-        res.status(200).json({ ...AUTHOR_DATA, ...results});
-    }, res);
+    const id = req.params.id;
+    try {
+        const itemResult = await utils.consumeAPI(`/items/${id}`);
+        const rawItem = JSON.parse(itemResult.toJSON().body);
+        const item = transformUtils.transformItemDetails(rawItem);
+        const itemDescriptionResult = await utils.consumeAPI(`/items/${id}/description`);
+        item.description = JSON.parse(itemDescriptionResult.toJSON().body).plain_text;
+        res.status(200).json({ 
+            author: AUTHOR_DATA,
+            item,
+            categories: await transformUtils.getCategories(rawItem.category_id)
+        });
+    } catch (e) {
+        res.status(500).json({ message: 'Error obteniendo información de la fuente', e });
+    }
 });
 
 app.get('*', (req, res) => {

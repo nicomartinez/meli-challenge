@@ -1,6 +1,4 @@
 const Home = () => {
-
-    return null;
-}
-
+    document.title = 'Mercado Libre';
+};
 export default Home;

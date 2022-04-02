@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatCurrecy, showDecimals } from '../utils/utils';
-import freeShipping from '../assets/ic_shipping.png';
+import freeShipping from '../assets/img/ic_shipping.png';
 
 const ProductList = ({ item }) => {
-    const detail = `/item/${item.id}`;
+    const detail = `/items/${item.id}`;
 
     return (
         <Link to={detail} className="link-decoration">
@@ -12,10 +12,10 @@ const ProductList = ({ item }) => {
                 <img className='product-image' alt="Imagen de producto" src={item.picture}/>
                 <div className='product-details'>
                     <p className="d-flex w-100">
-                        {formatCurrecy(item.price.amount, item.price.currency)}
+                        $ {formatCurrecy(item.price.amount, item.price.currency)}
                         <span className="price-decimals">{showDecimals(item.price.decimals)}</span>
                         {item.free_shipping && <span className='shipping'><img className='shipping-available' alt="envio disponible" src={freeShipping}/></span>}
-                        <span className="location">Prueba</span>
+                        <span className="location">{item.state_name}</span>
                     </p>
                     <p className='product-name'>{item.title}</p>
                 </div>

@@ -4,8 +4,8 @@ import {
   useNavigate,
   createSearchParams
 } from 'react-router-dom';
-import logo from './assets/Logo_ML.png';
-import searchIcon from './assets/ic_Search.png';
+import logo from './assets/img/Logo_ML.png';
+import searchIcon from './assets/img/ic_Search.png';
 
 const NavBar = () => {
   const navigate = useNavigate();

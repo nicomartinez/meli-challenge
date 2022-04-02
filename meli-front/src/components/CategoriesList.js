@@ -5,8 +5,8 @@ const CategoriesList = ({ categories }) => {
     (
         <div className='App-results-categories'>
             <ul>
-            {categories.map(cat => (
-                <li key={cat}>Cat {cat}</li>
+            {categories.map(category => (
+                <li key={category.id}>{category.name}</li>
             ))}
             </ul>
         </div>

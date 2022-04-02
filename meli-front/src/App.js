@@ -1,4 +1,4 @@
-import './App.scss';
+import './assets/styles/App.scss';
 import React from 'react';
 import NavBar from './NavBar';
 import {
@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import Home from './pages/Home';
 import ProductListPage from './pages/ProductListPage';
-import ProductDetail from './pages/ProductDetail';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/items" element={<ProductListPage />} />
-            <Route path="/items/:id" element={<ProductDetail />} />
+            <Route path="/items/:id" element={<ProductDetailPage />} />
             <Route element={Home}/>
         </Routes>
       </section>

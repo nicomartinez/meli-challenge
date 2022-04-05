@@ -175,6 +175,10 @@ $header-height: 2.7rem;
       .price {
         font-size: 2.875rem;
         margin-bottom: 2rem;
+        .price-decimals {
+          font-size: 1.5rem;
+          vertical-align: super;
+        }
       }
     }
     &-description {
